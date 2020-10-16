@@ -27,6 +27,8 @@
     <br>
     <input class="btn btn-success" value="Reload page" type="button" onclick="reloadPage()" id="reloadPage"></input>
     <br>
+    <p id="removeSuccess"></p>
+    <br>
     <h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>
 
 
@@ -37,10 +39,9 @@
             "Apple Iphone 8 Plus", "Fujitsu F-04E", "Oppo A71",];
         // console.log(Object.keys(arr).length);
         // arr.splice(5,1);
-        //
         // console.log(Object.keys(arr).length);
 
-        console.log(arr)
+        //console.log(arr)
 
         function displayAllProduct() {
             let sout = '<table style="font-size: 14px" border="1px solid white" cellspacing="0">';
@@ -72,15 +73,15 @@
         }
 
         function deleteProduct(id) {
+            let productToRm = arr[id];
             let length = getCorrectLength(arr);
             for (let i = 0; i < length; i++) {
                 if (i == id) {
                     arr.splice(id, 1);
-                    //debugger;
+                    document.getElementById("removeSuccess").innerHTML = "Removed " + productToRm + " !!!";
                     break;
                 }
             }
-            //console.log(filter_array(arr));
         }
 
         function removeNull(array) {
@@ -92,15 +93,12 @@
                 arr_length = test_array ? test_array.length : 0,
                 resIndex = -1,
                 result = [];
-
             while (++index < arr_length) {
                 var value = test_array[index];
-
                 if (value) {
                     result[++resIndex] = value;
                 }
             }
-
             return result;
         }
 
@@ -110,7 +108,6 @@
 
         function getCorrectLength(arr) {
             var len = 0;
-
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i] !== undefined) {
                     len++;
@@ -120,10 +117,23 @@
         }
 
         function reloadPage() {
-            for (let i = 0; i < arr.length; i++) {
+            let sout = '<table style="font-size: 14px" border="1px solid white" cellspacing="0">';
+            let length = getCorrectLength(arr);
 
+            sout += '<tr>' +
+                '<th colspan="2">Product Name</th>' +
+                // '<th></th>' +
+                '<th>' + length + ' Products</th>' +
+                '</tr>';
+            for (let i = 0; i < length; i++) {
+                sout += '<tr>';
+                sout += '<td>' + arr[i] + '</td>';
+                sout += `<td id="${i}" class="btn btn-success" type="button" onclick="editProduct(this.id)">Edit</td>`;
+                sout += `<td id="${i}" type="button" onclick="deleteProduct(this.id)">Delete</td>`;
+                sout += '</tr>'
             }
-
+            sout += '</table>';
+            document.getElementById("displayAP").innerHTML = sout;
         }
 
         // Hướng dẫn
