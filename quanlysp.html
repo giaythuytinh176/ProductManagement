@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<br>
+<br>
+<br>
+
+
+<div class="container">
+    <h1>Add New Product</h1>
+    <input class="form-group col-lg-3" style="font-size:14pt;" id="newproduct" type="text" placeholder="New Product"">
+    &nbsp;&nbsp; <input class="btn btn-success" type="button" onclick="addNewProduct()" value="Add">
+    <p id="addSucess"></p>
+    <br>
+    <br>
+    <input class="btn btn-success" value="Reload page" type="button" onclick="reloadPage()" id="reloadPage"></input>
+    <br>
+    <h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>
+
+
+    <script>
+        let arr = ["Sony Xperia", "Samsung Galaxy",
+            "Nokia 6", "Xiaomi Redmi Note 4",
+            "Apple Iphone 6S", "Xiaomi Mi 5S Plus",
+            "Apple Iphone 8 Plus", "Fujitsu F-04E", "Oppo A71",];
+        // console.log(Object.keys(arr).length);
+        // arr.splice(5,1);
+        //
+        // console.log(Object.keys(arr).length);
+
+        console.log(arr)
+
+        function displayAllProduct() {
+            let sout = '<table style="font-size: 14px" border="1px solid white" cellspacing="0">';
+            let length = getCorrectLength(arr);
+
+            sout += '<tr>' +
+                '<th colspan="2">Product Name</th>' +
+                // '<th></th>' +
+                '<th>' + length + ' Products</th>' +
+                '</tr>';
+            for (let i = 0; i < length; i++) {
+                sout += '<tr>';
+                sout += '<td>' + arr[i] + '</td>';
+                sout += `<td id="${i}" class="btn btn-success" type="button" onclick="editProduct(this.id)">Edit</td>`;
+                sout += `<td id="${i}" type="button" onclick="deleteProduct(this.id)">Delete</td>`;
+                sout += '</tr>'
+            }
+            sout += '</table>';
+            document.getElementById("displayAP").innerHTML = sout;
+        }
+
+        function addNewProduct() {
+            let item = document.getElementById("newproduct").value;
+            let length = getCorrectLength(arr);
+            for (let i = 0; i < length; i++) {
+                arr[length] = item;
+            }
+            document.getElementById("addSucess").innerHTML = "Added " + item + " !!!";
+        }
+
+        function deleteProduct(id) {
+            let length = getCorrectLength(arr);
+            for (let i = 0; i < length; i++) {
+                if (i == id) {
+                    arr.splice(id, 1);
+                    //debugger;
+                    break;
+                }
+            }
+            //console.log(filter_array(arr));
+        }
+
+        function removeNull(array) {
+            return array.filter(x => x !== null)
+        };
+
+        function filter_array(test_array) {
+            var index = -1,
+                arr_length = test_array ? test_array.length : 0,
+                resIndex = -1,
+                result = [];
+
+            while (++index < arr_length) {
+                var value = test_array[index];
+
+                if (value) {
+                    result[++resIndex] = value;
+                }
+            }
+
+            return result;
+        }
+
+        function getCorrectLength2(arr) {
+            return Object.keys(arr).length;
+        }
+
+        function getCorrectLength(arr) {
+            var len = 0;
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] !== undefined) {
+                    len++;
+                }
+            }
+            return len;
+        }
+
+        function reloadPage() {
+            for (let i = 0; i < arr.length; i++) {
+
+            }
+
+        }
+
+        // Hướng dẫn
+        // Bước 1: Tạo một trang HTML với các thẻ cơ bản
+        //
+        // Bước 2: Tạo một mảng chứa danh sách sản phẩm
+        //
+        // Bước 3: Xây dựng các hàm hiển  thị danh sách sản phẩm, thêm một sản phẩm vào danh sách, sửa tên sản phẩm, xoá sản phẩm.
+        //
+        //     Bước 4: Gọi hàm hiển thị danh sách sản phẩm
+        //
+        // Tạo một mảng lưu trữ tên của sản phẩm
+        // Sử dụng vòng lặp để hiển thị danh sách sản phẩm trên một bảng. Bảng này có 3 cột, cột đầu tiên là số thứ tự, cột thứ 2 là tên của sản phẩm, cột thứ 3 chứa nút để xoá sản phẩm.
+        //     Bước 5: Gọi hàm thêm một sản phẩm vào danh sách
+        //
+        // Tạo một form với một ô nhập tên sản phẩm và một nút "Thêm"
+        // Khi nhấn nút "Thêm" thì lấy tên mới nhập và đưa vào mảng.
+        //     Hiển thị thông báo.
+        //     Bước 6: Gọi hàm sửa một sản phẩm trong danh sách
+        //
+        // Tạo một form với một ô để hiển thị tên danh sách và một nút "Sửa"
+        // Khi nhấn vào một tên của sản phẩm trong danh sách thì hiển thị tên của nó ở trong ô tên danh sách
+        // Sau khi sửa tên và nhấn nút "Sửa" thì cập nhật lại tên của sản phẩm đó ở trong mảng
+        // Bước 7: Gọi hàm xoá một sản phẩm trong danh sách
+        //
+        // Khi nhấn vào nút "xoá" ở một sản phẩm, hãy tìm vị trí của sản phẩm đó trong danh sách
+        // Xoá sản phẩm đó trong danh sách
+        // Hiển thị lại bảng
+
+
+    </script>
+
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<style>
+    td {
+        width: 150px;
+        height: 50px;
+    }
+
+</style>
+
+</body>
+</html>
