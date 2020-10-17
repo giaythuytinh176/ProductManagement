@@ -25,10 +25,10 @@
     <p id="addSucess"></p>
     <br>
     <br>
-    <input class="btn btn-success" value="Reload page" type="button" onclick="reloadPage()" id="reloadPage"></input>
-    <br>
-    <p id="removeSuccess"></p>
-    <br>
+    <input class="btn btn-success" value="Reload page" type="button" onclick="reloadPage()" id="reloadPage">
+    <p id="removeSuccess" />
+    <p id="editProduct" />
+    <p id="saveProduct" />
     <h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>
     <!--    <h1 onclick="hideAllProduct()" id="hidedisplayAP">Hide All Product</h1>-->
 
@@ -45,6 +45,7 @@
         console.log(arr);
 
         function displayAllProduct() {
+            //debugger;
             let sout = '<table style="font-size: 14px" border="1px solid white" cellspacing="0">';
             let length = getCorrectLength(arr);
 
@@ -61,8 +62,47 @@
                 sout += '</tr>'
             }
             sout += '</table>';
+
+            sout += '<h1 onclick="hideAllProduct()" id="hideDisplayAP">Hide All Product</h1>';
             console.log(arr);
             document.getElementById("displayAP").innerHTML = sout;
+        }
+
+        function editProduct(id) {
+            let edit_sout = '<table style="font-size: 14px" border="1px solid white" cellspacing="0">';
+            edit_sout += '<tr>\n' +
+                '    <td>' + arr[id] + '</td>\n' +
+                '    <td><input type="text" id="itemToSave" size="30"/></td>\n' +
+                `<td id="${id}" class="btn btn-success" type="button" onclick="saveProduct(this.id)">Save</td>` +
+                '</tr>'
+            edit_sout += '</table>';
+            //console.log(edit_sout);
+            document.getElementById("editProduct").innerHTML = edit_sout;
+            //document.getElementById("displayAP").innerHTML = edit_sout;
+        }
+
+        function saveProduct(id) {
+            let saveItem = document.getElementById("itemToSave").value;
+            let length = getCorrectLength(arr);
+            for (let i = 0; i < length; i++) {
+                arr[id] = saveItem;
+                document.getElementById("saveProduct").innerHTML = "Saved " + saveItem + " !!!";
+                displayAllProduct();
+                break;
+            }
+        }
+
+        function editProduct2(id) {
+            let edit_sout = '<table style="font-size: 14px" border="1px solid white" cellspacing="0">';
+            edit_sout += '<tr>';
+            edit_sout += '<td>' + arr[id] + '</td>';
+            edit_sout += '<td></td>';
+            edit_sout += `<td id="${id}" class="btn btn-success" type="button" onclick="saveProduct(this.id)">Save</td>`;
+            edit_sout += '</tr>';
+            edit_sout += '</table>';
+            console.log(edit_sout);
+            document.getElementById("editProduct").innerHTML = edit_sout;
+            //document.getElementById("displayAP").innerHTML = edit_sout;
         }
 
         function addNewProduct() {
@@ -85,7 +125,6 @@
                 if (i == id) {
                     arr.splice(id, 1);
                     document.getElementById("removeSuccess").innerHTML = "Removed " + productToRm + " !!!";
-                    //displayAllProduct();
                     break;
                 }
             }
@@ -145,7 +184,7 @@
 
         function hideAllProduct() {
             //debugger;
-            document.getElementById("hidedisplayAP").innerHTML = '<h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>';
+            //document.getElementById("hidedisplayAP").innerHTML = '<h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>';
             document.getElementById("displayAP").innerHTML = '';
         }
 
