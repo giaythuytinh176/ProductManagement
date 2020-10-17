@@ -30,8 +30,7 @@
     <p id="removeSuccess"></p>
     <br>
     <h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>
-<!--    <h1 onclick="hideAllProduct()" id="hidedisplayAP">Hide All Product</h1>-->
-
+    <!--    <h1 onclick="hideAllProduct()" id="hidedisplayAP">Hide All Product</h1>-->
 
 
     <script>
@@ -69,8 +68,14 @@
         function addNewProduct() {
             let item = document.getElementById("newproduct").value;
             let length = getCorrectLength(arr);
-            arr[length] = item;
-            document.getElementById("addSucess").innerHTML = "Added " + item + " !!!";
+            if (arr.includes(item) == false) {
+                arr[length] = item;
+                document.getElementById("addSucess").innerHTML = "Added " + item + " !!!";
+                displayAllProduct();
+            } else {
+                document.getElementById("addSucess").innerHTML = item + " existed!!!";
+                displayAllProduct();
+            }
         }
 
         function deleteProduct(id) {
@@ -80,6 +85,7 @@
                 if (i == id) {
                     arr.splice(id, 1);
                     document.getElementById("removeSuccess").innerHTML = "Removed " + productToRm + " !!!";
+                    //displayAllProduct();
                     break;
                 }
             }
@@ -137,8 +143,7 @@
             document.getElementById("displayAP").innerHTML = sout;
         }
 
-        function hideAllProduct()
-        {
+        function hideAllProduct() {
             //debugger;
             document.getElementById("hidedisplayAP").innerHTML = '<h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>';
             document.getElementById("displayAP").innerHTML = '';
