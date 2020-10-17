@@ -30,6 +30,8 @@
     <p id="removeSuccess"></p>
     <br>
     <h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>
+<!--    <h1 onclick="hideAllProduct()" id="hidedisplayAP">Hide All Product</h1>-->
+
 
 
     <script>
@@ -41,7 +43,7 @@
         // arr.splice(5,1);
         // console.log(Object.keys(arr).length);
 
-        //console.log(arr)
+        console.log(arr);
 
         function displayAllProduct() {
             let sout = '<table style="font-size: 14px" border="1px solid white" cellspacing="0">';
@@ -60,15 +62,14 @@
                 sout += '</tr>'
             }
             sout += '</table>';
+            console.log(arr);
             document.getElementById("displayAP").innerHTML = sout;
         }
 
         function addNewProduct() {
             let item = document.getElementById("newproduct").value;
             let length = getCorrectLength(arr);
-            for (let i = 0; i < length; i++) {
-                arr[length] = item;
-            }
+            arr[length] = item;
             document.getElementById("addSucess").innerHTML = "Added " + item + " !!!";
         }
 
@@ -134,6 +135,13 @@
             }
             sout += '</table>';
             document.getElementById("displayAP").innerHTML = sout;
+        }
+
+        function hideAllProduct()
+        {
+            //debugger;
+            document.getElementById("hidedisplayAP").innerHTML = '<h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>';
+            document.getElementById("displayAP").innerHTML = '';
         }
 
         // Hướng dẫn
