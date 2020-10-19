@@ -30,7 +30,8 @@
     <p id="editProduct"/>
     <p id="saveProduct"/>
     <h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>
-    <!--    <h1 onclick="hideAllProduct()" id="hidedisplayAP">Hide All Product</h1>-->
+    <h1 onclick="hideAllProduct()" id="hideProduct">Hide All Product</h1>
+
 
 
     <script>
@@ -43,6 +44,17 @@
         // console.log(Object.keys(arr).length);
 
         console.log(arr);
+
+        function reloadPage() {
+            let sout = 'Display All Product';
+            document.getElementById("displayAP").innerHTML = sout;
+        }
+
+        function hideAllProduct() {
+            //debugger;
+            let sout = 'Display All Product';
+            document.getElementById("displayAP").innerHTML = sout;
+        }
 
         function displayAllProduct() {
             //debugger;
@@ -63,8 +75,7 @@
             }
             sout += '</table>';
 
-            sout += '<h1 onclick="hideAllProduct()" id="hideDisplayAP">Hide All Product</h1>';
-            console.log(arr);
+            console.log(sout);
             document.getElementById("displayAP").innerHTML = sout;
         }
 
@@ -100,7 +111,7 @@
             edit_sout += `<td id="${id}" class="btn btn-success" type="button" onclick="saveProduct(this.id)">Save</td>`;
             edit_sout += '</tr>';
             edit_sout += '</table>';
-            console.log(edit_sout);
+            //console.log(edit_sout);
             document.getElementById("editProduct").innerHTML = edit_sout;
             //document.getElementById("displayAP").innerHTML = edit_sout;
         }
@@ -124,7 +135,7 @@
             for (let i = 0; i < length; i++) {
                 if (i == id) {
                     arr.splice(id, 1);
-                    document.getElementById("removeSuccess").innerHTML = "Removed " + productToRm + " !!!";
+                    document.getElementById("removeSuccess").innerHTML = "Removed " + productToRm + " position " + eval(i + 1) + " !!!";
                     break;
                 }
             }
@@ -162,31 +173,6 @@
             return len;
         }
 
-        function reloadPage() {
-            let sout = '<table style="font-size: 14px" border="1px solid white" cellspacing="0">';
-            let length = getCorrectLength(arr);
-
-            sout += '<tr>' +
-                '<th colspan="2">Product Name</th>' +
-                // '<th></th>' +
-                '<th>' + length + ' Products</th>' +
-                '</tr>';
-            for (let i = 0; i < length; i++) {
-                sout += '<tr>';
-                sout += '<td>' + arr[i] + '</td>';
-                sout += `<td id="${i}" class="btn btn-success" type="button" onclick="editProduct(this.id)">Edit</td>`;
-                sout += `<td id="${i}" type="button" onclick="deleteProduct(this.id)">Delete</td>`;
-                sout += '</tr>'
-            }
-            sout += '</table>';
-            document.getElementById("displayAP").innerHTML = sout;
-        }
-
-        function hideAllProduct() {
-            //debugger;
-            //document.getElementById("hidedisplayAP").innerHTML = '<h1 onclick="displayAllProduct()" id="displayAP">Display All Product</h1>';
-            document.getElementById("displayAP").innerHTML = '';
-        }
 
         // Hướng dẫn
         // Bước 1: Tạo một trang HTML với các thẻ cơ bản
